@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinitas Tours and Travels – Self Drive Car Rental in Goa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-dark: #0a7a7a;
+    --teal-mid: #16a899;
+    --teal-light: #3dd6c8;
+    --green-mid: #1db88a;
+    --grad: linear-gradient(135deg, #1a9e9e 0%, #16b88a 100%);
+    --grad-hero: linear-gradient(160deg, #0e8f8f 0%, #14b88a 60%, #1dd4a0 100%);
+    --white: #ffffff;
+    --off-white: #f4fbfa;
+    --dark: #0d2b2b;
+    --text: #1a3a3a;
+    --muted: #5a8080;
+    --border: rgba(22, 168, 153, 0.2);
+    --card-bg: rgba(255,255,255,0.92);
+    --shadow: 0 8px 40px rgba(10,122,122,0.13);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 70px;
+    box-shadow: 0 2px 20px rgba(10,122,122,0.08);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 50px; height: 50px;
+    background: var(--grad);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-logo-icon svg { width: 32px; height: 32px; }
+  .nav-logo-text { line-height: 1.1; }
+  .nav-logo-text .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--teal-dark); }
+  .nav-logo-text .sub { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal-mid); }
+
+  .nav-cta {
+    background: var(--grad); color: white;
+    padding: 10px 22px; border-radius: 50px;
+    text-decoration: none; font-weight: 600; font-size: 0.88rem;
+    display: flex; align-items: center; gap: 8px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 25px; height: 2px; background: var(--teal-dark); border-radius: 2px; transition: 0.3s; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: var(--grad-hero);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 80px 5vw 0;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-bg-circle.c1 { width: 600px; height: 600px; top: -200px; right: -150px; }
+  .hero-bg-circle.c2 { width: 400px; height: 400px; bottom: -100px; left: -100px; }
+  .hero-bg-circle.c3 { width: 200px; height: 200px; top: 30%; right: 10%; }
+
+  .hero-content {
+    max-width: 600px; z-index: 2; padding: 60px 0;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.2); color: white;
+    padding: 6px 16px; border-radius: 50px; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700; color: white; line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero-title span { color: rgba(255,255,255,0.75); font-weight: 400; }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.88); font-size: 1.05rem; line-height: 1.7;
+    margin-bottom: 36px; font-weight: 300;
+  }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: white; color: var(--teal-dark);
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 700; text-decoration: none; font-size: 0.95rem;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 600; text-decoration: none; font-size: 0.95rem;
+    border: 2px solid rgba(255,255,255,0.6);
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 50px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: white; }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+  .hero-visual {
+    position: absolute; right: 5vw; top: 50%; transform: translateY(-50%);
+    z-index: 2; animation: float 4s ease-in-out infinite;
+  }
+  .hero-logo-big {
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+  }
+  .hero-logo-big svg { width: 200px; height: 200px; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) translateY(0); }
+    50% { transform: translateY(-50%) translateY(-15px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 90px 5vw; }
+  .section-label {
+    display: inline-block;
+    color: var(--teal-mid); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+    color: var(--dark); line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); font-size: 1rem; max-width: 540px; line-height: 1.7; margin-bottom: 50px; }
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  /* ── BOOKING FORM ── */
+  #book {
+    background: var(--grad);
+    position: relative; overflow: hidden;
+  }
+  #book::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .booking-card {
+    background: white; border-radius: 24px;
+    padding: 50px; max-width: 900px; margin: 0 auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+    position: relative; z-index: 2;
+  }
+
+  .booking-header { text-align: center; margin-bottom: 36px; }
+  .booking-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--dark); }
+  .booking-header p { color: var(--muted); margin-top: 8px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-full { grid-column: 1 / -1; }
+
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--text); letter-spacing: 0.03em; }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.93rem; color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: white;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(22,168,153,0.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .otp-section { display: none; }
+  .otp-section.active { display: block; }
+
+  .otp-row { display: flex; gap: 12px; align-items: flex-end; }
+  .otp-row .form-group { flex: 1; }
+
+  .btn-send-otp, .btn-verify-otp {
+    padding: 13px 22px; border: none; border-radius: 10px;
+    font-weight: 600; font-size: 0.88rem; cursor: pointer;
+    white-space: nowrap; transition: all 0.2s;
+  }
+  .btn-send-otp { background: var(--grad); color: white; }
+  .btn-send-otp:hover { opacity: 0.9; }
+  .btn-verify-otp { background: var(--teal-dark); color: white; }
+  .btn-verify-otp:hover { opacity: 0.9; }
+
+  .otp-msg { font-size: 0.8rem; margin-top: 6px; }
+  .otp-msg.success { color: #1a9a4a; }
+  .otp-msg.error { color: #c0392b; }
+  .otp-msg.info { color: var(--teal-mid); }
+
+  .verified-badge {
+    display: none; align-items: center; gap: 6px;
+    color: #1a9a4a; font-size: 0.88rem; font-weight: 600;
+    background: #e6f7ef; padding: 10px 16px; border-radius: 10px;
+    border: 1.5px solid #b3e8cc;
+  }
+  .verified-badge.show { display: flex; }
+
+  .booking-submit {
+    width: 100%; padding: 16px;
+    background: var(--grad); color: white;
+    border: none; border-radius: 12px;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    letter-spacing: 0.03em; transition: all 0.2s;
+    margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .booking-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(22,168,153,0.4); }
+  .booking-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--off-white); }
+
+  .pricing-filter {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .filter-btn {
+    padding: 8px 20px; border-radius: 50px;
+    border: 1.5px solid var(--border); background: white;
+    font-size: 0.85rem; font-weight: 500; cursor: pointer;
+    transition: all 0.2s; color: var(--text);
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--grad); color: white; border-color: transparent;
+  }
+
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .price-card {
+    background: white; border-radius: var(--radius);
+    padding: 28px; border: 1.5px solid var(--border);
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .price-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 4px; background: var(--grad);
+  }
+  .price-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--teal-light); }
+
+  .car-type { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .car-icon {
+    width: 50px; height: 50px; border-radius: 12px;
+    background: linear-gradient(135deg, #e8f9f7 0%, #d0f5ef 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+  }
+  .car-name { font-weight: 700; font-size: 1.05rem; color: var(--dark); }
+  .car-variant { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  .price-rows { display: flex; flex-direction: column; gap: 10px; }
+  .price-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0; border-bottom: 1px solid #f0f7f6;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .day-label { font-size: 0.85rem; color: var(--muted); }
+  .price-val { font-weight: 700; color: var(--teal-dark); font-size: 1rem; }
+
+  .book-this-btn {
+    width: 100%; margin-top: 20px;
+    padding: 11px; background: var(--grad); color: white;
+    border: none; border-radius: 10px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .book-this-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ── LOCATIONS ── */
+  #locations { background: white; }
+
+  .locations-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .loc-card {
+    background: var(--off-white); border-radius: var(--radius);
+    padding: 24px; border: 1.5px solid var(--border);
+    display: flex; align-items: center; gap: 16px;
+    transition: all 0.2s;
+  }
+  .loc-card:hover { background: linear-gradient(135deg, #e8f9f7, #d0f5f0); border-color: var(--teal-light); transform: translateY(-3px); }
+  .loc-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--grad); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1.4rem;
+  }
+  .loc-name { font-weight: 700; font-size: 0.95rem; color: var(--dark); }
+  .loc-type { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+
+  /* ── WHY US ── */
+  #why { background: var(--off-white); }
+
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .why-card {
+    background: white; border-radius: var(--radius); padding: 32px;
+    border: 1.5px solid var(--border); transition: all 0.3s;
+  }
+  .why-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+  .why-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700;
+    color: rgba(22,168,153,0.15); line-height: 1; margin-bottom: 12px;
+  }
+  .why-title { font-weight: 700; font-size: 1.05rem; color: var(--dark); margin-bottom: 10px; }
+  .why-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: white; }
+
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .testi-card {
+    background: var(--off-white); border-radius: var(--radius); padding: 28px;
+    border: 1.5px solid var(--border); transition: all 0.2s;
+  }
+  .testi-card:hover { box-shadow: var(--shadow); }
+  .stars { color: #f6c90e; font-size: 1rem; margin-bottom: 14px; }
+  .testi-text { color: var(--text); font-size: 0.93rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--grad); display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 1rem;
+  }
+  .testi-name { font-weight: 700; font-size: 0.92rem; color: var(--dark); }
+  .testi-loc { font-size: 0.75rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--dark); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+  .contact-info .section-title { color: white; }
+  .contact-info .section-sub { color: rgba(255,255,255,0.6); }
+
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px;
+  }
+  .contact-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: rgba(255,255,255,0.1); display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .contact-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .contact-val { color: white; font-weight: 500; font-size: 0.97rem; line-height: 1.5; }
+  .contact-val a { color: var(--teal-light); text-decoration: none; }
+  .contact-val a:hover { text-decoration: underline; }
+
+  .social-links { display: flex; gap: 12px; margin-top: 8px; }
+  .social-btn {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: white; text-decoration: none; font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #091e1e; padding: 24px 5vw;
+    text-align: center; color: rgba(255,255,255,0.4);
+    font-size: 0.82rem; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer a { color: var(--teal-light); text-decoration: none; }
+
+  /* ── SUCCESS MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55); z-index: 9999;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 24px; padding: 50px 40px;
+    max-width: 480px; width: 90%; text-align: center;
+    animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .modal-icon { font-size: 3.5rem; margin-bottom: 16px; }
+  .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--dark); margin-bottom: 10px; }
+  .modal p { color: var(--muted); line-height: 1.6; font-size: 0.95rem; margin-bottom: 24px; }
+  .modal-ref { font-size: 0.8rem; color: var(--teal-mid); background: #e8f9f7; padding: 8px 16px; border-radius: 8px; margin-bottom: 24px; display: inline-block; }
+  .modal-close {
+    padding: 12px 32px; background: var(--grad); color: white;
+    border: none; border-radius: 50px; font-weight: 700;
+    font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
+  }
+  .modal-close:hover { opacity: 0.9; }
+
+  /* ── ADMIN PANEL ── */
+  #admin-panel {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 9998; overflow-y: auto;
+    padding: 40px 20px;
+  }
+  #admin-panel.open { display: block; }
+  .admin-box {
+    background: white; border-radius: 20px; max-width: 1100px;
+    margin: 0 auto; padding: 40px;
+  }
+  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .admin-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--dark); }
+  .admin-close { padding: 8px 20px; background: #fee; border: 1px solid #fcc; border-radius: 8px; cursor: pointer; color: #c0392b; font-weight: 600; }
+
+  .admin-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+  .admin-stat { background: var(--off-white); border-radius: 12px; padding: 20px; text-align: center; }
+  .admin-stat-num { font-size: 2rem; font-weight: 700; color: var(--teal-dark); }
+  .admin-stat-label { font-size: 0.78rem; color: var(--muted); }
+
+  .bookings-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .bookings-table th { background: var(--teal-mid); color: white; padding: 12px 14px; text-align: left; }
+  .bookings-table td { padding: 11px 14px; border-bottom: 1px solid #f0f0f0; }
+  .bookings-table tr:hover td { background: #f9feff; }
+  .status-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+  .status-new { background: #e8f7ff; color: #0066cc; }
+  .status-confirmed { background: #e6f7ef; color: #1a9a4a; }
+
+  /* ── FLOATING WHATSAPP ── */
+  .float-wa {
+    position: fixed; bottom: 28px; right: 28px; z-index: 900;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25d366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 25px rgba(37,211,102,0.4); text-decoration: none;
+    transition: all 0.2s; animation: pulse-wa 2.5s infinite;
+  }
+  .float-wa:hover { transform: scale(1.08); }
+  .float-wa svg { width: 30px; height: 30px; fill: white; }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 6px 25px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 6px 35px rgba(37,211,102,0.65); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-visual { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-full { grid-column: 1; }
+    .admin-stats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .booking-card { padding: 28px 20px; }
+    .hero-stats { gap: 24px; }
+    .otp-row { flex-direction: column; }
+    .bookings-table { font-size: 0.75rem; }
+    .bookings-table th, .bookings-table td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 20 Q10 8 22 8 Q30 8 30 20 Q30 32 38 32 Q50 32 50 20 Q50 8 38 8 Q30 8 30 20 Q30 32 22 32 Q10 32 10 20Z" stroke="white" stroke-width="2.5" fill="none"/>
+        <path d="M44 15 L50 20 L44 25" fill="white"/>
+      </svg>
+    </div>
+    <div class="nav-logo-text">
+      <div class="brand">Infinitas</div>
+      <div class="sub">Tours & Travels</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#book">Book Now</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#locations">Pickup Locations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:9096930336" class="nav-cta">
+    📞 Call to Book
+  </a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🌊 Self Drive Car Rental · Goa</div>
+    <h1 class="hero-title">
+      Explore Goa<br><span>On Your Own Terms</span>
+    </h1>
+    <p class="hero-desc">
+      Drive the beaches, backwaters & beyond. Premium self-drive rentals with no hidden charges — pickup from Goa's railways stations, airports & bus stands.
+    </p>
+    <div class="hero-btns">
+      <a href="#book" class="btn-primary">🚗 Book Now</a>
+      <a href="tel:9096930336" class="btn-outline">📞 +91 90969 30336</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Car Models</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Rated Service</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-logo-big">
+      <!-- Infinity + Plane SVG -->
+      <svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 80 Q40 30 90 30 Q120 30 120 80 Q120 130 150 130 Q200 130 200 80 Q200 30 150 30 Q120 30 120 80 Q120 130 90 130 Q40 130 40 80Z"
+          stroke="rgba(255,255,255,0.85)" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- Plane -->
+        <g transform="translate(167,62) rotate(-35)">
+          <polygon points="0,-10 6,5 0,2 -6,5" fill="white"/>
+          <rect x="-8" y="0" width="16" height="3" rx="1.5" fill="rgba(255,255,255,0.7)" transform="rotate(90,0,2)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="book">
+  <div class="booking-card">
+    <div class="booking-header">
+      <h2>🗓️ Book Your Ride</h2>
+      <p>Fill the form below — we'll confirm via call or WhatsApp</p>
+    </div>
+
+    <form id="bookingForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="b_name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="b_email" placeholder="yourname@email.com">
+        </div>
+
+        <!-- Phone + OTP -->
+        <div class="form-group form-full">
+          <label>Phone Number * (OTP verification required)</label>
+          <div class="otp-row">
+            <div class="form-group" style="flex:1">
+              <input type="tel" id="b_phone" placeholder="+91 XXXXX XXXXX" maxlength="15">
+            </div>
+            <button type="button" class="btn-send-otp" id="sendOtpBtn" onclick="sendOTP()">Send OTP</button>
+          </div>
+          <div class="otp-msg info" id="otpMsg"></div>
+        </div>
+
+        <div class="form-group form-full otp-section" id="otpSection">
+          <label>Enter OTP *</label>
+          <div class="otp-row">
+            <div class="form-group" style="flex:1">
+              <input type="text" id="b_otp" placeholder="Enter 6-digit OTP" maxlength="6">
+            </div>
+            <button type="button" class="btn-verify-otp" onclick="verifyOTP()">Verify OTP</button>
+          </div>
+          <div class="otp-msg" id="otpVerifyMsg"></div>
+        </div>
+
+        <div class="form-group form-full" id="verifiedSection" style="display:none">
+          <div class="verified-badge show" id="verifiedBadge">
+            ✅ Phone number verified successfully!
+          </div>
+        </div>
+
+        <!-- Car Selection -->
+        <div class="form-group">
+          <label>Select Car *</label>
+          <select id="b_car" required onchange="updatePrice()">
+            <option value="">-- Choose Vehicle --</option>
+            <option value="Swift Manual">Swift Manual</option>
+            <option value="Swift Automatic">Swift Automatic</option>
+            <option value="i20 Manual">i20 Manual</option>
+            <option value="i20 Automatic">i20 Automatic</option>
+            <option value="Baleno Manual">Baleno Manual</option>
+            <option value="Baleno Automatic">Baleno Automatic</option>
+            <option value="Venue Manual">Venue Manual</option>
+            <option value="Venue Automatic">Venue Automatic</option>
+            <option value="Brezza Manual">Brezza Manual</option>
+            <option value="Brezza Automatic">Brezza Automatic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Days *</label>
+          <select id="b_days" required onchange="updatePrice()">
+            <option value="">-- Select Days --</option>
+            <option value="1">1 Day</option>
+            <option value="2">2 Days</option>
+            <option value="3">3 Days</option>
+            <option value="custom">Custom (specify in notes)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Pickup Location *</label>
+          <select id="b_pickup" required>
+            <option value="">-- Select Pickup --</option>
+            <optgroup label="🚉 Railway Stations">
+              <option>Madgaon Railway Station</option>
+              <option>Vasco Railway Station</option>
+              <option>Thivim Railway Station</option>
+              <option>Karmali Railway Station</option>
+              <option>Canacona Railway Station</option>
+            </optgroup>
+            <optgroup label="✈️ Airport">
+              <option>Mopa (Manohar International Airport)</option>
+              <option>Dabolim Airport</option>
+            </optgroup>
+            <optgroup label="🚌 Bus Stands">
+              <option>Panaji Bus Stand (Kadamba)</option>
+              <option>Mapusa Bus Stand</option>
+              <option>Ponda Bus Stand</option>
+              <option>Vasco Bus Stand</option>
+            </optgroup>
+            <optgroup label="📍 Popular Areas">
+              <option>Baga Beach</option>
+              <option>Calangute</option>
+              <option>Anjuna</option>
+              <option>Panjim City Centre</option>
+              <option>Margao City</option>
+            </optgroup>
+            <option value="custom">Other (specify below)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Drop Location *</label>
+          <select id="b_drop" required>
+            <option value="">-- Select Drop --</option>
+            <optgroup label="🚉 Railway Stations">
+              <option>Madgaon Railway Station</option>
+              <option>Vasco Railway Station</option>
+              <option>Thivim Railway Station</option>
+              <option>Karmali Railway Station</option>
+              <option>Canacona Railway Station</option>
+            </optgroup>
+            <optgroup label="✈️ Airport">
+              <option>Mopa (Manohar International Airport)</option>
+              <option>Dabolim Airport</option>
+            </optgroup>
+            <optgroup label="🚌 Bus Stands">
+              <option>Panaji Bus Stand (Kadamba)</option>
+              <option>Mapusa Bus Stand</option>
+              <option>Ponda Bus Stand</option>
+              <option>Vasco Bus Stand</option>
+            </optgroup>
+            <optgroup label="📍 Popular Areas">
+              <option>Baga Beach</option>
+              <option>Calangute</option>
+              <option>Anjuna</option>
+              <option>Panjim City Centre</option>
+              <option>Margao City</option>
+            </optgroup>
+            <option value="custom">Other (specify below)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Pickup Date *</label>
+          <input type="date" id="b_date" required>
+        </div>
+        <div class="form-group">
+          <label>Pickup Time *</label>
+          <input type="time" id="b_time" required>
+        </div>
+
+        <div class="form-group form-full" id="pricePreview" style="display:none">
+          <div style="background: linear-gradient(135deg,#e8f9f7,#d0f5ef); padding:16px 20px; border-radius:12px; border:1.5px solid #b3e8d8;">
+            <div style="font-size:0.8rem;color:var(--muted);margin-bottom:4px;">Estimated Price</div>
+            <div style="font-size:1.5rem;font-weight:700;color:var(--teal-dark)" id="priceText">—</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">Final price confirmed via call · No hidden charges</div>
+          </div>
+        </div>
+
+        <div class="form-group form-full">
+          <label>Custom Location / Special Notes</label>
+          <textarea id="b_notes" placeholder="Specify custom pickup/drop location, requirements, or any other details..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="booking-submit" id="submitBtn" disabled>
+        📧 Send Booking Request
+      </button>
+      <div style="text-align:center;margin-top:12px;font-size:0.8rem;color:var(--muted)">
+        We'll confirm your booking via call or WhatsApp within 30 minutes
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="text-center">
+    <div class="section-label">Transparent Pricing</div>
+    <h2 class="section-title">Our Rental Rates</h2>
+    <p class="section-sub mx-auto">No hidden charges. What you see is what you pay. Filter by transmission type.</p>
+  </div>
+
+  <div class="pricing-filter">
+    <button class="filter-btn active" onclick="filterPricing('all',this)">All Cars</button>
+    <button class="filter-btn" onclick="filterPricing('manual',this)">Manual</button>
+    <button class="filter-btn" onclick="filterPricing('auto',this)">Automatic</button>
+    <button class="filter-btn" onclick="filterPricing('hatchback',this)">Hatchback</button>
+    <button class="filter-btn" onclick="filterPricing('suv',this)">SUV</button>
+  </div>
+
+  <div class="pricing-grid" id="pricingGrid"></div>
+</section>
+
+<!-- PICKUP LOCATIONS -->
+<section id="locations">
+  <div class="text-center">
+    <div class="section-label">Pickup & Drop</div>
+    <h2 class="section-title">We Come To You</h2>
+    <p class="section-sub mx-auto">Pick up and drop your vehicle at any of these convenient locations across Goa.</p>
+  </div>
+
+  <div class="locations-grid">
+    <div class="loc-card">
+      <div class="loc-icon">🚉</div>
+      <div>
+        <div class="loc-name">Madgaon Railway Station</div>
+        <div class="loc-type">Railway Station · South Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚉</div>
+      <div>
+        <div class="loc-name">Vasco Railway Station</div>
+        <div class="loc-type">Railway Station · Vasco da Gama</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚉</div>
+      <div>
+        <div class="loc-name">Thivim Railway Station</div>
+        <div class="loc-type">Railway Station · North Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚉</div>
+      <div>
+        <div class="loc-name">Karmali Railway Station</div>
+        <div class="loc-type">Railway Station · Old Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚉</div>
+      <div>
+        <div class="loc-name">Canacona Railway Station</div>
+        <div class="loc-type">Railway Station · South Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">✈️</div>
+      <div>
+        <div class="loc-name">Mopa International Airport</div>
+        <div class="loc-type">Airport · North Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">✈️</div>
+      <div>
+        <div class="loc-name">Dabolim Airport</div>
+        <div class="loc-type">Airport · South Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚌</div>
+      <div>
+        <div class="loc-name">Panaji Bus Stand</div>
+        <div class="loc-type">Kadamba Bus Stand · Panjim</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚌</div>
+      <div>
+        <div class="loc-name">Mapusa Bus Stand</div>
+        <div class="loc-type">Bus Stand · North Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚌</div>
+      <div>
+        <div class="loc-name">Ponda Bus Stand</div>
+        <div class="loc-type">Bus Stand · Central Goa</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">🚌</div>
+      <div>
+        <div class="loc-name">Vasco Bus Stand</div>
+        <div class="loc-type">Bus Stand · Vasco da Gama</div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-icon">📍</div>
+      <div>
+        <div class="loc-name">Baga / Calangute / Anjuna</div>
+        <div class="loc-type">Beach Areas · North Goa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="text-center">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">The Infinitas Advantage</h2>
+    <p class="section-sub mx-auto">We're not just a rental company — we're your local Goa travel partner.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div class="why-title">Zero Hidden Charges</div>
+      <div class="why-desc">The price you see is the price you pay. No surprise fees, no confusing add-ons. Transparent billing always.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div class="why-title">Doorstep Delivery</div>
+      <div class="why-desc">We deliver the car to your hotel, airport, railway station or anywhere in Goa. Total convenience.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div class="why-title">24/7 Roadside Support</div>
+      <div class="why-desc">Traveling can be unpredictable. Our team is always a call away for any assistance you need on the road.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <div class="why-title">Well-Maintained Fleet</div>
+      <div class="why-desc">Every car in our fleet is serviced, cleaned and road-ready. From hatchbacks to SUVs, drive in comfort.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">05</div>
+      <div class="why-title">Flexible Durations</div>
+      <div class="why-desc">Book for a day, a weekend, or longer. We have packages that flex to fit your travel plans.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">06</div>
+      <div class="why-title">Local Goa Experts</div>
+      <div class="why-desc">Based right in Baga, Goa — we know every road, every beach and can help you plan your perfect trip.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="text-center">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-sub mx-auto">Real words from real travellers who explored Goa with us.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Booked a Baleno for 3 days — the car was spotless and picked us up right at Madgaon station. No fuss, no overcharging. Will definitely use Infinitas again on our next Goa trip!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RS</div>
+        <div>
+          <div class="testi-name">Rahul Sharma</div>
+          <div class="testi-loc">Mumbai · Dec 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"We landed at Mopa Airport and the car was waiting for us. Pricing is honest and the vehicle was in great condition. The team was super responsive on WhatsApp. Highly recommend!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PK</div>
+        <div>
+          <div class="testi-name">Priya Kapoor</div>
+          <div class="testi-loc">Bengaluru · Jan 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Got a Venue SUV for 2 days and drove all the way from Baga to Palolem. The car was smooth, the AC was perfect, and returning at Margao station was seamless. 10/10 experience!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AM</div>
+        <div>
+          <div class="testi-name">Arjun Mehta</div>
+          <div class="testi-loc">Delhi · Feb 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label" style="color:var(--teal-light)">Get In Touch</div>
+      <h2 class="section-title">Let's Plan Your<br>Goa Adventure</h2>
+      <p class="section-sub">We're located right in Baga — the heart of Goa's tourism. Reach us by phone, email or walk in!</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone / WhatsApp</div>
+          <div class="contact-val">
+            <a href="tel:9096930336">+91 90969 30336</a><br>
+            <a href="https://wa.me/917507310605" target="_blank">+91 75073 10605</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">
+            <a href="mailto:bookings@infinitastoursandtravels.com">bookings@infinitastoursandtravels.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Shop Address</div>
+          <div class="contact-val">
+            Shop No. E7/23-2, Opposite Hotel Baga Marinha,<br>
+            Santa Vaddo, Baga, Goa
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">⏰</div>
+        <div>
+          <div class="contact-label">Working Hours</div>
+          <div class="contact-val">Open 7 Days · 8:00 AM – 9:00 PM</div>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="https://wa.me/917507310605" target="_blank" class="social-btn" title="WhatsApp">💬</a>
+        <a href="tel:9096930336" class="social-btn" title="Call">📞</a>
+        <a href="mailto:bookings@infinitastoursandtravels.com" class="social-btn" title="Email">✉️</a>
+      </div>
+    </div>
+
+    <div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:32px;">
+        <h3 style="color:white;font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:20px;">📱 Quick Contact</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="tel:9096930336" style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 20px;text-decoration:none;color:white;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+            <span style="font-size:1.5rem">📞</span>
+            <div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:2px;">CALL US</div>
+              <div style="font-weight:600">+91 90969 30336</div>
+            </div>
+          </a>
+          <a href="https://wa.me/917507310605?text=Hi%2C%20I%20want%20to%20book%20a%20car%20with%20Infinitas%20Tours%20and%20Travels%21" target="_blank" style="display:flex;align-items:center;gap:14px;background:#128c7e;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 20px;text-decoration:none;color:white;transition:all 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            <span style="font-size:1.5rem">💬</span>
+            <div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.7);margin-bottom:2px;">WHATSAPP</div>
+              <div style="font-weight:600">+91 75073 10605</div>
+            </div>
+          </a>
+          <a href="mailto:bookings@infinitastoursandtravels.com" style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 20px;text-decoration:none;color:white;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+            <span style="font-size:1.5rem">✉️</span>
+            <div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:2px;">EMAIL</div>
+              <div style="font-weight:600">bookings@infinitastoursandtravels.com</div>
+            </div>
+          </a>
+          <a href="#book" style="display:flex;align-items:center;justify-content:center;gap:10px;background:var(--grad);border-radius:12px;padding:16px 20px;text-decoration:none;color:white;font-weight:700;font-size:1rem;transition:all 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+            🚗 Book Online Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="margin-bottom:12px;font-size:1rem;color:rgba(255,255,255,0.7)">
+    <strong style="color:white;font-family:'Cormorant Garamond',serif;font-size:1.2rem">Infinitas Tours and Travels</strong>
+  </div>
+  <div style="margin-bottom:8px">Shop No. E7/23-2, Opposite Hotel Baga Marinha, Santa Vaddo, Baga, Goa &nbsp;|&nbsp; <a href="tel:9096930336">+91 90969 30336</a></div>
+  <div>© 2025 Infinitas Tours and Travels. All rights reserved. &nbsp;|&nbsp;
+    <span style="cursor:pointer;color:var(--teal-light)" onclick="openAdmin()">Admin</span>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/917507310605?text=Hi%2C%20I%20want%20to%20book%20a%20car%20with%20Infinitas%20Tours%20and%20Travels%21" target="_blank" class="float-wa" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h3>Booking Request Sent!</h3>
+    <p>Thank you! Your booking request has been received. Our team will contact you within 30 minutes via call or WhatsApp to confirm.</p>
+    <div class="modal-ref" id="bookingRef"></div>
+    <div style="margin-bottom:20px;font-size:0.88rem;color:var(--muted)">
+      📞 <strong>+91 90969 30336</strong> &nbsp;|&nbsp; 💬 <strong>+91 75073 10605</strong>
+    </div>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-box">
+    <div class="admin-header">
+      <h2>📋 Bookings Dashboard</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕ Close</button>
+    </div>
+    <div class="admin-stats" id="adminStats"></div>
+    <div style="overflow-x:auto">
+      <table class="bookings-table" id="bookingsTable">
+        <thead>
+          <tr>
+            <th>Ref #</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Car</th>
+            <th>Days</th>
+            <th>Pickup</th>
+            <th>Drop</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="bookingsBody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:12px;">
+      <button onclick="exportCSV()" style="padding:10px 20px;background:var(--grad);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">📥 Export CSV</button>
+      <button onclick="clearBookings()" style="padding:10px 20px;background:#fee;border:1px solid #fcc;border-radius:8px;cursor:pointer;color:#c0392b;font-weight:600;">🗑️ Clear All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ──────────────────────────────────────────
+// PRICING DATA
+// ──────────────────────────────────────────
+const PRICING = {
+  "Swift Manual":    { type: "hatchback", tx: "manual", icon: "🚗", prices: [1400, 2500, 3600] },
+  "Swift Automatic": { type: "hatchback", tx: "auto",   icon: "🚗", prices: [1500, 3000, 4300] },
+  "i20 Manual":      { type: "hatchback", tx: "manual", icon: "🚙", prices: [1400, 2500, 3600] },
+  "i20 Automatic":   { type: "hatchback", tx: "auto",   icon: "🚙", prices: [1500, 3000, 4300] },
+  "Baleno Manual":   { type: "hatchback", tx: "manual", icon: "🏎️", prices: [1500, 2600, 3750] },
+  "Baleno Automatic":{ type: "hatchback", tx: "auto",   icon: "🏎️", prices: [1600, 3000, 4400] },
+  "Venue Manual":    { type: "suv",       tx: "manual", icon: "🚐", prices: [2000, 3800, 5400] },
+  "Venue Automatic": { type: "suv",       tx: "auto",   icon: "🚐", prices: [2200, 4100, 6000] },
+  "Brezza Manual":   { type: "suv",       tx: "manual", icon: "🛻", prices: [2000, 3800, 5400] },
+  "Brezza Automatic":{ type: "suv",       tx: "auto",   icon: "🛻", prices: [2200, 4100, 6000] },
+};
+
+// ──────────────────────────────────────────
+// RENDER PRICING CARDS
+// ──────────────────────────────────────────
+function renderPricing(filter = "all") {
+  const grid = document.getElementById("pricingGrid");
+  grid.innerHTML = "";
+
+  Object.entries(PRICING).forEach(([name, data]) => {
+    if (filter !== "all") {
+      if (filter === "manual" && data.tx !== "manual") return;
+      if (filter === "auto" && data.tx !== "auto") return;
+      if (filter === "hatchback" && data.type !== "hatchback") return;
+      if (filter === "suv" && data.type !== "suv") return;
+    }
+    const parts = name.split(" ");
+    const variant = parts.slice(1).join(" ");
+    const carBase = parts[0];
+    const card = document.createElement("div");
+    card.className = "price-card";
+    card.innerHTML = `
+      <div class="car-type">
+        <div class="car-icon">${data.icon}</div>
+        <div>
+          <div class="car-name">${carBase}</div>
+          <div class="car-variant">${variant} · ${data.type === 'suv' ? 'SUV' : 'Hatchback'}</div>
+        </div>
+      </div>
+      <div class="price-rows">
+        <div class="price-row"><span class="day-label">1 Day</span><span class="price-val">₹${data.prices[0].toLocaleString()}/-</span></div>
+        <div class="price-row"><span class="day-label">2 Days</span><span class="price-val">₹${data.prices[1].toLocaleString()}/-</span></div>
+        <div class="price-row"><span class="day-label">3 Days</span><span class="price-val">₹${data.prices[2].toLocaleString()}/-</span></div>
+      </div>
+      <button class="book-this-btn" onclick="prefillCar('${name}')">
+        🚗 Book ${carBase} ${variant}
+      </button>
+    `;
+    grid.appendChild(card);
+  });
+}
+renderPricing();
+
+function filterPricing(filter, btn) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderPricing(filter);
+}
+
+function prefillCar(name) {
+  document.getElementById("b_car").value = name;
+  document.getElementById("book").scrollIntoView({ behavior: "smooth" });
+  updatePrice();
+}
+
+// ──────────────────────────────────────────
+// PRICE PREVIEW
+// ──────────────────────────────────────────
+function updatePrice() {
+  const car = document.getElementById("b_car").value;
+  const days = document.getElementById("b_days").value;
+  const preview = document.getElementById("pricePreview");
+  const priceText = document.getElementById("priceText");
+
+  if (car && days && days !== "custom" && PRICING[car]) {
+    const d = parseInt(days) - 1;
+    const price = PRICING[car].prices[d];
+    priceText.textContent = `₹${price.toLocaleString()}/- for ${days} day${days>1?'s':''}`;
+    preview.style.display = "block";
+  } else {
+    preview.style.display = "none";
+  }
+}
+
+// ──────────────────────────────────────────
+// OTP SYSTEM (simulated — in production wire to SMS API)
+// ──────────────────────────────────────────
+let generatedOTP = null;
+let phoneVerified = false;
+
+function sendOTP() {
+  const phone = document.getElementById("b_phone").value.trim();
+  if (!phone || phone.length < 10) {
+    showOtpMsg("otpMsg", "Please enter a valid phone number first.", "error");
+    return;
+  }
+  generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+  document.getElementById("otpSection").classList.add("active");
+  document.getElementById("sendOtpBtn").textContent = "Resend OTP";
+  showOtpMsg("otpMsg", `OTP sent to ${phone}! (Demo OTP: ${generatedOTP})`, "info");
+}
+
+function verifyOTP() {
+  const entered = document.getElementById("b_otp").value.trim();
+  if (entered === generatedOTP) {
+    phoneVerified = true;
+    document.getElementById("otpSection").classList.remove("active");
+    document.getElementById("verifiedSection").style.display = "block";
+    document.getElementById("submitBtn").disabled = false;
+    showOtpMsg("otpMsg", "", "");
+    showOtpMsg("otpVerifyMsg", "", "");
+  } else {
+    showOtpMsg("otpVerifyMsg", "Incorrect OTP. Please try again.", "error");
+  }
+}
+
+function showOtpMsg(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = "otp-msg " + type;
+}
+
+// ──────────────────────────────────────────
+// LIGHT DB — localStorage
+// ──────────────────────────────────────────
+function getBookings() {
+  return JSON.parse(localStorage.getItem("infinitas_bookings") || "[]");
+}
+function saveBookings(arr) {
+  localStorage.setItem("infinitas_bookings", JSON.stringify(arr));
+}
+function genRef() {
+  return "INF-" + Date.now().toString(36).toUpperCase();
+}
+
+// ──────────────────────────────────────────
+// FORM SUBMIT
+// ──────────────────────────────────────────
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  if (!phoneVerified) {
+    alert("Please verify your phone number with OTP before submitting.");
+    return;
+  }
+
+  const car = document.getElementById("b_car").value;
+  const days = document.getElementById("b_days").value;
+  let price = "";
+  if (car && days && days !== "custom" && PRICING[car]) {
+    price = "₹" + PRICING[car].prices[parseInt(days)-1].toLocaleString() + "/-";
+  }
+
+  const booking = {
+    ref: genRef(),
+    name: document.getElementById("b_name").value,
+    phone: document.getElementById("b_phone").value,
+    email: document.getElementById("b_email").value,
+    car: car,
+    days: days,
+    pickup: document.getElementById("b_pickup").value,
+    drop: document.getElementById("b_drop").value,
+    date: document.getElementById("b_date").value,
+    time: document.getElementById("b_time").value,
+    notes: document.getElementById("b_notes").value,
+    price: price,
+    status: "new",
+    created: new Date().toISOString()
+  };
+
+  const bookings = getBookings();
+  bookings.unshift(booking);
+  saveBookings(bookings);
+
+  document.getElementById("bookingRef").textContent = `Booking Reference: ${booking.ref}`;
+  document.getElementById("successModal").classList.add("open");
+  document.getElementById("bookingForm").reset();
+  phoneVerified = false;
+  document.getElementById("verifiedSection").style.display = "none";
+  document.getElementById("otpSection").classList.remove("active");
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("pricePreview").style.display = "none";
+  document.getElementById("sendOtpBtn").textContent = "Send OTP";
+  showOtpMsg("otpMsg", "", "");
+});
+
+function closeModal() {
+  document.getElementById("successModal").classList.remove("open");
+}
+
+// ──────────────────────────────────────────
+// ADMIN PANEL
+// ──────────────────────────────────────────
+function openAdmin() {
+  const pass = prompt("Admin Password:");
+  if (pass !== "infinitas2025") { alert("Incorrect password."); return; }
+  renderAdmin();
+  document.getElementById("admin-panel").classList.add("open");
+}
+function closeAdmin() {
+  document.getElementById("admin-panel").classList.remove("open");
+}
+
+function renderAdmin() {
+  const bookings = getBookings();
+  const today = new Date().toISOString().split("T")[0];
+  const todayCount = bookings.filter(b => b.created && b.created.startsWith(today)).length;
+
+  document.getElementById("adminStats").innerHTML = `
+    <div class="admin-stat"><div class="admin-stat-num">${bookings.length}</div><div class="admin-stat-label">Total Bookings</div></div>
+    <div class="admin-stat"><div class="admin-stat-num">${todayCount}</div><div class="admin-stat-label">Today</div></div>
+    <div class="admin-stat"><div class="admin-stat-num">${bookings.filter(b=>b.status==="confirmed").length}</div><div class="admin-stat-label">Confirmed</div></div>
+    <div class="admin-stat"><div class="admin-stat-num">${bookings.filter(b=>b.status==="new").length}</div><div class="admin-stat-label">Pending</div></div>
+  `;
+
+  const tbody = document.getElementById("bookingsBody");
+  if (bookings.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:30px;color:#999">No bookings yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = bookings.map((b, i) => `
+    <tr>
+      <td><strong>${b.ref}</strong></td>
+      <td>${b.name}</td>
+      <td><a href="tel:${b.phone}">${b.phone}</a></td>
+      <td>${b.email || "—"}</td>
+      <td>${b.car}</td>
+      <td>${b.days}</td>
+      <td>${b.pickup}</td>
+      <td>${b.drop}</td>
+      <td>${b.date} ${b.time}</td>
+      <td><strong>${b.price || "TBD"}</strong></td>
+      <td>
+        <select onchange="updateStatus(${i}, this.value)" style="border:1px solid #ddd;border-radius:6px;padding:4px 8px;font-size:0.8rem">
+          <option value="new" ${b.status==="new"?"selected":""}>🆕 New</option>
+          <option value="confirmed" ${b.status==="confirmed"?"selected":""}>✅ Confirmed</option>
+          <option value="completed" ${b.status==="completed"?"selected":""}>✔️ Completed</option>
+          <option value="cancelled" ${b.status==="cancelled"?"selected":""}>❌ Cancelled</option>
+        </select>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function updateStatus(index, status) {
+  const bookings = getBookings();
+  bookings[index].status = status;
+  saveBookings(bookings);
+}
+
+function clearBookings() {
+  if (confirm("Delete ALL bookings? This cannot be undone.")) {
+    localStorage.removeItem("infinitas_bookings");
+    renderAdmin();
+  }
+}
+
+function exportCSV() {
+  const bookings = getBookings();
+  if (bookings.length === 0) { alert("No bookings to export."); return; }
+  const headers = ["Ref","Name","Phone","Email","Car","Days","Pickup","Drop","Date","Time","Price","Notes","Status","Created"];
+  const rows = bookings.map(b => [b.ref,b.name,b.phone,b.email,b.car,b.days,b.pickup,b.drop,b.date,b.time,b.price,b.notes,b.status,b.created].map(v => `"${(v||"").replace(/"/g,'""')}"`).join(","));
+  const csv = [headers.join(","), ...rows].join("\n");
+  const blob = new Blob([csv], {type:"text/csv"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = url; a.download = "infinitas-bookings.csv"; a.click();
+}
+
+// ──────────────────────────────────────────
+// NAV / UI HELPERS
+// ──────────────────────────────────────────
+function toggleMenu() {
+  const links = document.querySelector(".nav-links");
+  links.style.display = links.style.display === "flex" ? "none" : "flex";
+  links.style.flexDirection = "column";
+  links.style.position = "absolute";
+  links.style.top = "70px";
+  links.style.left = "0"; links.style.right = "0";
+  links.style.background = "white";
+  links.style.padding = "20px";
+  links.style.boxShadow = "0 10px 30px rgba(0,0,0,0.1)";
+}
+
+window.addEventListener("scroll", () => {
+  const nav = document.getElementById("navbar");
+  nav.style.boxShadow = window.scrollY > 20 ? "0 4px 30px rgba(10,122,122,0.12)" : "none";
+});
+
+// Set min date for booking
+document.getElementById("b_date").min = new Date().toISOString().split("T")[0];
+</script>
+</body>
+</html>
